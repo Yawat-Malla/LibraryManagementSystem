@@ -6,7 +6,6 @@ public class Book {
     private String author;
     private int year;
 
-    // Constructors, getters, and setters
 
     public int getId() {
         return id;
