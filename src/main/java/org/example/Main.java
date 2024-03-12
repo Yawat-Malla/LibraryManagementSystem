@@ -2,13 +2,52 @@ package org.example;
 
 import org.example.Models.Book;
 import org.example.Models.BookHandler;
+
 import java.util.List;
 import java.util.Scanner;
+
+import static org.example.SignupManager.initializeDatabase;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        initializeDatabase();
+
+        while (true) {
+            displayMainMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    LoginManager loginManager = new LoginManager();
+                    if (loginManager.login()) {
+                        runApp();
+                    }
+                    break;
+                case 2:
+                    SignupManager signupManager = new SignupManager();
+                    signupManager.signup();
+                    break;
+                case 3:
+                    System.out.println("Exiting the Library Management System.");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+    private static void displayMainMenu() {
+        System.out.println("\nLibrary Management System Menu:");
+        System.out.println("1. Login");
+        System.out.println("2. Signup");
+        System.out.println("3. Exit");
+        System.out.print("Enter your choice: ");
+    }
+    private static void runApp() {
+        // Your existing code for the book management system goes here
         BookHandler bookHandler = new BookHandler();
         bookHandler.createTable();
 
@@ -39,6 +78,7 @@ public class Main {
             }
         }
     }
+
 
     private static void displayMenu() {
         System.out.println("\nLibrary Management System Menu:");
